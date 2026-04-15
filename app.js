@@ -5,7 +5,7 @@ const ui = {
   themeToggle: document.getElementById("theme-toggle"),
   disciplineSelect: document.getElementById("discipline-select"),
   worldviewSelect: document.getElementById("worldview-select"),
-  searchInput: document.getElementById("argument-search"),
+  searchInput: document.getElementById("claim-search"),
   resultCount: document.getElementById("result-count"),
   claimsList: document.getElementById("claims-list"),
   responseCard: document.getElementById("response-card")
@@ -27,6 +27,18 @@ const disciplines = [
   id: toDisciplineId(disciplineName),
   name: disciplineName
 }));
+
+function asArray(value) {
+  if (Array.isArray(value)) {
+    return value.filter(Boolean);
+  }
+
+  if (typeof value === "string" && value.trim()) {
+    return [value.trim()];
+  }
+
+  return [];
+}
 
 function setFallacyReferenceOpen(isOpen) {
   if (!ui.fallacyReference || !ui.fallacyReferenceToggle) {
@@ -133,7 +145,7 @@ function getWorldviews() {
   const seen = new Set();
 
   return worldviewData
-    .flatMap((claim) => (Array.isArray(claim.worldview) ? claim.worldview : []))
+    .flatMap((claim) => asArray(claim.worldview))
     .filter((worldviewName) => {
       if (!worldviewName || seen.has(worldviewName)) {
         return false;
@@ -158,10 +170,8 @@ function getFilteredClaims() {
 
   if (state.activeDisciplineId) {
     filtered = filtered.filter((claim) => {
-      if (!Array.isArray(claim.disciplines)) {
-        return false;
-      }
-      return claim.disciplines.some(
+      const claimDisciplines = asArray(claim.disciplines || claim.discipline);
+      return claimDisciplines.some(
         (discipline) => toDisciplineId(discipline) === state.activeDisciplineId
       );
     });
@@ -169,21 +179,23 @@ function getFilteredClaims() {
 
   if (state.activeWorldviewId) {
     filtered = filtered.filter((claim) => {
-      if (!Array.isArray(claim.worldview)) {
-        return false;
-      }
-      return claim.worldview.some((item) => toWorldviewId(item) === state.activeWorldviewId);
+      return asArray(claim.worldview).some(
+        (item) => toWorldviewId(item) === state.activeWorldviewId
+      );
     });
   }
 
   if (state.searchTerm) {
     const term = state.searchTerm.toLowerCase();
     filtered = filtered.filter((claim) => {
-      const argumentText = (claim.argument || "").toLowerCase();
-      const disciplineText = Array.isArray(claim.disciplines)
-        ? claim.disciplines.join(" ").toLowerCase()
-        : "";
-      return argumentText.includes(term) || disciplineText.includes(term);
+      const claimText = (claim.claim || claim.argument || "").toLowerCase();
+      const disciplineText = asArray(claim.disciplines || claim.discipline).join(" ").toLowerCase();
+      const worldviewText = asArray(claim.worldview).join(" ").toLowerCase();
+      return (
+        claimText.includes(term) ||
+        disciplineText.includes(term) ||
+        worldviewText.includes(term)
+      );
     });
   }
 
@@ -195,7 +207,7 @@ function renderFilterSummary(resultCount) {
     return;
   }
 
-  ui.resultCount.textContent = `${resultCount} argument(s) found`;
+  ui.resultCount.textContent = `${resultCount} claim(s) found`;
 }
 
 function renderDisciplineFilters() {
@@ -294,7 +306,7 @@ function renderClaims() {
   renderFilterSummary(claims.length);
 
   if (!claims.length) {
-    ui.claimsList.innerHTML = "<p class=\"placeholder\">No arguments match this filter yet.</p>";
+    ui.claimsList.innerHTML = "<p class=\"placeholder\">No claims match this filter yet.</p>";
     return;
   }
 
@@ -302,7 +314,7 @@ function renderClaims() {
     const button = document.createElement("button");
     button.className = `claim-btn ${claim.id === state.activeClaimId ? "active" : ""}`;
     button.type = "button";
-    button.textContent = claim.argument;
+    button.textContent = claim.claim || claim.argument || "Untitled claim";
 
     button.addEventListener("click", () => {
       state.activeClaimId = claim.id;
@@ -327,21 +339,31 @@ function renderResponse() {
     return;
   }
 
-  const reasoningItems = (claim.supportingReasoning || [])
+  const reasoningItems = asArray(claim.supportingReasoning)
     .map((point) => `<li>${point}</li>`)
     .join("");
 
-  const disciplineItems = (claim.disciplines || [])
+  const disciplineItems = asArray(claim.disciplines || claim.discipline)
     .map((discipline) => `<span class="chip">${discipline}</span>`)
     .join("");
 
-  const worldviewItems = (claim.worldview || [])
+  const worldviewItems = asArray(claim.worldview)
     .map((item) => `<span class="chip">${item}</span>`)
     .join("");
 
+  const metaItems = [disciplineItems, worldviewItems].filter(Boolean).join("");
+  const logicalFallacyBadge = claim.logicalFallacy
+    ? `
+      <div class="fallacy-badge-wrap">
+        <span class="fallacy-badge">${claim.logicalFallacy}</span>
+      </div>
+    `
+    : "";
+
   ui.responseCard.innerHTML = `
+    ${logicalFallacyBadge}
     <div class="response-block">
-      <h4>Core Issue With The Claim</h4>
+      <h4>Belief</h4>
       <p>${claim.coreIssue || "Not added yet."}</p>
     </div>
     <div class="response-block">
@@ -349,24 +371,15 @@ function renderResponse() {
       <p>${claim.christianResponse || "Not added yet."}</p>
     </div>
     <div class="response-block">
-      <h4>Logical Error / Fallacy</h4>
-      <p>${claim.logicalFallacy || "No logical error or fallacy listed for this claim yet."}</p>
-    </div>
-    <div class="response-block">
       <h4>Supporting Reasoning</h4>
       ${reasoningItems ? `<ul class="reason-list">${reasoningItems}</ul>` : "<p>Not added yet.</p>"}
     </div>
     <div class="response-block meta-block">
-      <h4>Disciplines</h4>
       ${
-        disciplineItems
-          ? `<div class="chip-wrap">${disciplineItems}</div>`
-          : "<p>No disciplines listed for this claim yet.</p>"
+        metaItems
+          ? `<div class="chip-wrap meta-chip-row">${metaItems}</div>`
+          : "<p>No disciplines or worldview listed for this claim yet.</p>"
       }
-    </div>
-    <div class="response-block meta-block">
-      <h4>Worldview(s)</h4>
-      ${worldviewItems ? `<div class="chip-wrap">${worldviewItems}</div>` : "<p>No worldview listed for this claim yet.</p>"}
     </div>
   `;
 }

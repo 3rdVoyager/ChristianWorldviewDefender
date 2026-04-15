@@ -362,6 +362,23 @@ body {
   gap: 8px;
 }
 
+.fallacy-badge-wrap {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.fallacy-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff8a00, #ff4d6d);
+  color: #fff8f2;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba(255, 248, 242, 0.18);
+}
+
 .response-block {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -375,6 +392,10 @@ body {
   border-top: 1px dashed var(--meta-divider);
   border-radius: 0;
   padding: 6px 0 0;
+}
+
+.meta-chip-row {
+  gap: 10px;
 }
 
 .response-block h4 {
