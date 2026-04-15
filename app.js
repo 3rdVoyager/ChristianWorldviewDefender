@@ -331,10 +331,6 @@ function renderResponse() {
     .map((point) => `<li>${point}</li>`)
     .join("");
 
-  const verseItems = (claim.bibleVerses || [])
-    .map((verse) => `<li>${verse}</li>`)
-    .join("");
-
   const disciplineItems = (claim.disciplines || [])
     .map((discipline) => `<span class="chip">${discipline}</span>`)
     .join("");
@@ -353,8 +349,8 @@ function renderResponse() {
       <p>${claim.christianResponse || "Not added yet."}</p>
     </div>
     <div class="response-block">
-      <h4>Bible Verse(s)</h4>
-      ${verseItems ? `<ul class="reason-list">${verseItems}</ul>` : "<p>No Bible verses listed for this claim yet.</p>"}
+      <h4>Logical Error / Fallacy</h4>
+      <p>${claim.logicalFallacy || "No logical error or fallacy listed for this claim yet."}</p>
     </div>
     <div class="response-block">
       <h4>Supporting Reasoning</h4>
