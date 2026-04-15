@@ -61,7 +61,7 @@ Church & Practical Objections
 const worldviewData = [
 	{
 		id: 1,
-		tags: ["Jesus", "Morality"],
+		disciplines: [],
 		worldview: ["Islam", "Secularism"],
 		argument: "Jesus was just a great moral teacher",
 		coreIssue: "",
@@ -71,7 +71,7 @@ const worldviewData = [
 	},
 	{
 		id: 2,
-		tags: ["Jesus"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "The resurrection is a myth or legend",
 		coreIssue: "",
@@ -81,7 +81,7 @@ const worldviewData = [
 	},
 	{
 		id: 3,
-		tags: ["Bible", "Jesus"],
+		disciplines: [],
 		worldview: ["Islam", "Secularism"],
 		argument: "The Gospels are unreliable / corrupted over time",
 		coreIssue: "",
@@ -91,7 +91,7 @@ const worldviewData = [
 	},
 	{
 		id: 4,
-		tags: ["Jesus", "God"],
+		disciplines: [],
 		worldview: ["Islam", "Secularism"],
 		argument: "Jesus never claimed to be God",
 		coreIssue: "",
@@ -101,7 +101,7 @@ const worldviewData = [
 	},
 	{
 		id: 5,
-		tags: ["Jesus", "Truth"],
+		disciplines: [],
 		worldview: ["Secularism", "Postmodernism"],
 		argument: "Christianity copied earlier religions",
 		coreIssue: "",
@@ -111,7 +111,7 @@ const worldviewData = [
 	},
 	{
 		id: 6,
-		tags: ["Truth", "Reason"],
+		disciplines: [],
 		worldview: ["Postmodernism"],
 		argument: "There is no absolute truth",
 		coreIssue: "",
@@ -121,7 +121,7 @@ const worldviewData = [
 	},
 	{
 		id: 7,
-		tags: ["Truth", "Reason"],
+		disciplines: [],
 		worldview: ["Postmodernism", "New Spirituality"],
 		argument: "Truth is relative to culture or perspective",
 		coreIssue: "",
@@ -131,7 +131,7 @@ const worldviewData = [
 	},
 	{
 		id: 8,
-		tags: ["Truth", "Reason"],
+		disciplines: [],
 		worldview: ["Postmodernism"],
 		argument: "You can't really know what's true",
 		coreIssue: "",
@@ -141,7 +141,7 @@ const worldviewData = [
 	},
 	{
 		id: 9,
-		tags: ["Truth", "Science", "Reason"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "Science is the only reliable way to know truth",
 		coreIssue: "",
@@ -151,7 +151,7 @@ const worldviewData = [
 	},
 	{
 		id: 10,
-		tags: ["Faith", "Reason", "Truth"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "Faith is belief without evidence",
 		coreIssue: "",
@@ -161,7 +161,7 @@ const worldviewData = [
 	},
 	{
 		id: 11,
-		tags: ["God"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "There is no evidence for God",
 		coreIssue: "",
@@ -171,7 +171,7 @@ const worldviewData = [
 	},
 	{
 		id: 12,
-		tags: ["God"],
+		disciplines: [],
 		worldview: ["Marxism", "Secularism"],
 		argument: "God is just a human invention",
 		coreIssue: "",
@@ -181,7 +181,7 @@ const worldviewData = [
 	},
 	{
 		id: 13,
-		tags: ["God", "Science"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "Science has explained the universe, so God isn't needed",
 		coreIssue: "",
@@ -191,7 +191,7 @@ const worldviewData = [
 	},
 	{
 		id: 14,
-		tags: ["God"],
+		disciplines: [],
 		worldview: ["Secularism", "New Spirituality"],
 		argument: "If God exists, why isn't He more obvious?",
 		coreIssue: "",
@@ -201,7 +201,7 @@ const worldviewData = [
 	},
 	{
 		id: 15,
-		tags: ["God", "Science"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "Miracles are impossible",
 		coreIssue: "",
@@ -211,7 +211,7 @@ const worldviewData = [
 	},
 	{
 		id: 16,
-		tags: ["God", "Evil"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "If God is good and all-powerful, why is there evil?",
 		coreIssue: "",
@@ -221,7 +221,7 @@ const worldviewData = [
 	},
 	{
 		id: 17,
-		tags: ["God", "Evil"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "Suffering disproves a loving God",
 		coreIssue: "",
@@ -231,7 +231,7 @@ const worldviewData = [
 	},
 	{
 		id: 18,
-		tags: ["God", "Evil"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "The world is too broken to have a good creator",
 		coreIssue: "",
@@ -241,7 +241,7 @@ const worldviewData = [
 	},
 	{
 		id: 19,
-		tags: ["God", "Evil"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "Natural disasters make no sense if God is in control",
 		coreIssue: "",
@@ -251,7 +251,7 @@ const worldviewData = [
 	},
 	{
 		id: 20,
-		tags: ["Truth", "Morality"],
+		disciplines: [],
 		worldview: ["Postmodernism", "Secularism"],
 		argument: "Morality is subjective",
 		coreIssue: "",
@@ -261,7 +261,7 @@ const worldviewData = [
 	},
 	{
 		id: 21,
-		tags: ["God", "Morality"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "You don't need God to be a good person",
 		coreIssue: "",
@@ -271,7 +271,7 @@ const worldviewData = [
 	},
 	{
 		id: 22,
-		tags: ["Bible", "Morality"],
+		disciplines: [],
 		worldview: ["Postmodernism", "Secularism"],
 		argument: "The Bible is morally outdated",
 		coreIssue: "",
@@ -281,7 +281,7 @@ const worldviewData = [
 	},
 	{
 		id: 23,
-		tags: ["Morality"],
+		disciplines: [],
 		worldview: ["Postmodernism", "Marxism"],
 		argument: "Christian morality is oppressive or harmful",
 		coreIssue: "",
@@ -291,7 +291,7 @@ const worldviewData = [
 	},
 	{
 		id: 24,
-		tags: ["Truth", "Morality"],
+		disciplines: [],
 		worldview: ["Marxism", "Postmodernism"],
 		argument: "Right and wrong are just social constructs",
 		coreIssue: "",
@@ -301,7 +301,7 @@ const worldviewData = [
 	},
 	{
 		id: 25,
-		tags: ["Science", "God"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "Science disproves God",
 		coreIssue: "",
@@ -311,7 +311,7 @@ const worldviewData = [
 	},
 	{
 		id: 26,
-		tags: ["Science", "Bible"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "Evolution disproves Christianity",
 		coreIssue: "",
@@ -321,7 +321,7 @@ const worldviewData = [
 	},
 	{
 		id: 27,
-		tags: ["Bible", "Science"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "The Bible conflicts with science",
 		coreIssue: "",
@@ -331,7 +331,7 @@ const worldviewData = [
 	},
 	{
 		id: 28,
-		tags: ["Science", "God"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "Miracles violate natural laws",
 		coreIssue: "",
@@ -341,7 +341,7 @@ const worldviewData = [
 	},
 	{
 		id: 29,
-		tags: ["Science"],
+		disciplines: [],
 		worldview: ["Secularism", "Marxism"],
 		argument: "Religion slows scientific progress",
 		coreIssue: "",
@@ -351,7 +351,7 @@ const worldviewData = [
 	},
 	{
 		id: 30,
-		tags: ["Truth", "Faith"],
+		disciplines: [],
 		worldview: ["New Spirituality", "Postmodernism"],
 		argument: "All religions are basically the same",
 		coreIssue: "",
@@ -361,7 +361,7 @@ const worldviewData = [
 	},
 	{
 		id: 31,
-		tags: ["Truth", "Jesus", "Faith"],
+		disciplines: [],
 		worldview: ["New Spirituality"],
 		argument: "Christianity is just one path among many",
 		coreIssue: "",
@@ -371,7 +371,7 @@ const worldviewData = [
 	},
 	{
 		id: 32,
-		tags: ["Truth", "Jesus"],
+		disciplines: [],
 		worldview: ["Postmodernism", "New Spirituality"],
 		argument: "It's arrogant to say Christianity is the only truth",
 		coreIssue: "",
@@ -381,7 +381,7 @@ const worldviewData = [
 	},
 	{
 		id: 33,
-		tags: ["Truth"],
+		disciplines: [],
 		worldview: ["Postmodernism"],
 		argument: "Different cultures create different religions, so none are objectively true",
 		coreIssue: "",
@@ -391,7 +391,7 @@ const worldviewData = [
 	},
 	{
 		id: 34,
-		tags: ["Morality"],
+		disciplines: [],
 		worldview: ["New Spirituality", "Secularism"],
 		argument: "Humans are basically good",
 		coreIssue: "",
@@ -401,7 +401,7 @@ const worldviewData = [
 	},
 	{
 		id: 35,
-		tags: ["God", "Truth"],
+		disciplines: [],
 		worldview: ["Secularism", "Postmodernism"],
 		argument: "Life has no objective meaning",
 		coreIssue: "",
@@ -411,7 +411,7 @@ const worldviewData = [
 	},
 	{
 		id: 36,
-		tags: ["God", "Truth"],
+		disciplines: [],
 		worldview: ["Secularism", "New Spirituality"],
 		argument: "We create our own purpose",
 		coreIssue: "",
@@ -421,7 +421,7 @@ const worldviewData = [
 	},
 	{
 		id: 37,
-		tags: ["Science", "Morality"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "We are just highly evolved animals",
 		coreIssue: "",
@@ -431,7 +431,7 @@ const worldviewData = [
 	},
 	{
 		id: 38,
-		tags: ["Science"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "Consciousness is purely physical",
 		coreIssue: "",
@@ -441,7 +441,7 @@ const worldviewData = [
 	},
 	{
 		id: 39,
-		tags: ["Morality"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "Christians are hypocrites",
 		coreIssue: "",
@@ -451,7 +451,7 @@ const worldviewData = [
 	},
 	{
 		id: 40,
-		tags: ["Morality"],
+		disciplines: [],
 		worldview: ["Secularism", "Marxism"],
 		argument: "Religion causes more harm than good",
 		coreIssue: "",
@@ -461,7 +461,7 @@ const worldviewData = [
 	},
 	{
 		id: 41,
-		tags: ["Morality"],
+		disciplines: [],
 		worldview: ["Secularism"],
 		argument: "The Church has done terrible things in history",
 		coreIssue: "",
@@ -471,7 +471,7 @@ const worldviewData = [
 	},
 	{
 		id: 42,
-		tags: ["Truth", "Morality"],
+		disciplines: [],
 		worldview: ["Marxism", "Secularism"],
 		argument: "Christianity is just about control",
 		coreIssue: "",

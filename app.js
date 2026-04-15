@@ -3,7 +3,7 @@ const ui = {
   fallacyReferenceToggle: document.getElementById("fallacy-reference-toggle"),
   fallacyReferenceClose: document.getElementById("fallacy-reference-close"),
   themeToggle: document.getElementById("theme-toggle"),
-  tagSelect: document.getElementById("tag-select"),
+  disciplineSelect: document.getElementById("discipline-select"),
   worldviewSelect: document.getElementById("worldview-select"),
   searchInput: document.getElementById("argument-search"),
   resultCount: document.getElementById("result-count"),
@@ -12,6 +12,21 @@ const ui = {
 };
 
 const THEME_STORAGE_KEY = "worldview-theme";
+const disciplines = [
+  "Theology",
+  "Philosophy",
+  "Ethics",
+  "Biology",
+  "Psychology",
+  "Sociology",
+  "Law",
+  "Politics",
+  "Economics",
+  "History"
+].map((disciplineName) => ({
+  id: toDisciplineId(disciplineName),
+  name: disciplineName
+}));
 
 function setFallacyReferenceOpen(isOpen) {
   if (!ui.fallacyReference || !ui.fallacyReferenceToggle) {
@@ -106,23 +121,8 @@ function setupThemeToggle() {
   });
 }
 
-function toTagId(tagName) {
-  return tagName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
-}
-
-function getTags() {
-  const seen = new Set();
-
-  return worldviewData
-    .flatMap((claim) => (Array.isArray(claim.tags) ? claim.tags : []))
-    .filter((tagName) => {
-      if (!tagName || seen.has(tagName)) {
-        return false;
-      }
-      seen.add(tagName);
-      return true;
-    })
-    .map((tagName) => ({ id: toTagId(tagName), name: tagName }));
+function toDisciplineId(disciplineName) {
+  return disciplineName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
 
 function toWorldviewId(worldviewName) {
@@ -144,11 +144,10 @@ function getWorldviews() {
     .map((worldviewName) => ({ id: toWorldviewId(worldviewName), name: worldviewName }));
 }
 
-const tags = getTags();
 const worldviews = getWorldviews();
 
 const state = {
-  activeCategoryId: null,
+  activeDisciplineId: null,
   activeWorldviewId: null,
   searchTerm: "",
   activeClaimId: null
@@ -157,12 +156,14 @@ const state = {
 function getFilteredClaims() {
   let filtered = worldviewData;
 
-  if (state.activeCategoryId) {
+  if (state.activeDisciplineId) {
     filtered = filtered.filter((claim) => {
-      if (!Array.isArray(claim.tags)) {
+      if (!Array.isArray(claim.disciplines)) {
         return false;
       }
-      return claim.tags.some((tag) => toTagId(tag) === state.activeCategoryId);
+      return claim.disciplines.some(
+        (discipline) => toDisciplineId(discipline) === state.activeDisciplineId
+      );
     });
   }
 
@@ -179,8 +180,10 @@ function getFilteredClaims() {
     const term = state.searchTerm.toLowerCase();
     filtered = filtered.filter((claim) => {
       const argumentText = (claim.argument || "").toLowerCase();
-      const tagText = Array.isArray(claim.tags) ? claim.tags.join(" ").toLowerCase() : "";
-      return argumentText.includes(term) || tagText.includes(term);
+      const disciplineText = Array.isArray(claim.disciplines)
+        ? claim.disciplines.join(" ").toLowerCase()
+        : "";
+      return argumentText.includes(term) || disciplineText.includes(term);
     });
   }
 
@@ -195,38 +198,27 @@ function renderFilterSummary(resultCount) {
   ui.resultCount.textContent = `${resultCount} argument(s) found`;
 }
 
-function renderTagFilters() {
-  if (!ui.tagSelect) {
+function renderDisciplineFilters() {
+  if (!ui.disciplineSelect) {
     return;
   }
 
-  ui.tagSelect.innerHTML = "";
+  ui.disciplineSelect.innerHTML = "";
 
   const placeholderOption = document.createElement("option");
   placeholderOption.value = "";
-  placeholderOption.textContent = "Filter by tag";
-  ui.tagSelect.appendChild(placeholderOption);
+  placeholderOption.textContent = "Filter by discipline";
+  ui.disciplineSelect.appendChild(placeholderOption);
 
-  tags.forEach((tag) => {
+  disciplines.forEach((discipline) => {
     const option = document.createElement("option");
-    option.value = tag.id;
-    option.textContent = tag.name;
-    ui.tagSelect.appendChild(option);
+    option.value = discipline.id;
+    option.textContent = discipline.name;
+    ui.disciplineSelect.appendChild(option);
   });
 
-  ui.tagSelect.value = state.activeCategoryId || "";
-
-  if (tags.length === 0) {
-    const noTagsOption = document.createElement("option");
-    noTagsOption.value = "";
-    noTagsOption.textContent = "No tags yet";
-    ui.tagSelect.innerHTML = "";
-    ui.tagSelect.appendChild(noTagsOption);
-    ui.tagSelect.disabled = true;
-    ui.tagSelect.value = "";
-  } else {
-    ui.tagSelect.disabled = false;
-  }
+  ui.disciplineSelect.value = state.activeDisciplineId || "";
+  ui.disciplineSelect.disabled = false;
 }
 
 function renderWorldviewFilters() {
@@ -264,9 +256,9 @@ function renderWorldviewFilters() {
 }
 
 function setupFilters() {
-  if (ui.tagSelect) {
-    ui.tagSelect.addEventListener("change", (event) => {
-      state.activeCategoryId = event.target.value || null;
+  if (ui.disciplineSelect) {
+    ui.disciplineSelect.addEventListener("change", (event) => {
+      state.activeDisciplineId = event.target.value || null;
       state.activeClaimId = null;
       renderClaims();
       renderResponse();
@@ -343,8 +335,8 @@ function renderResponse() {
     .map((verse) => `<li>${verse}</li>`)
     .join("");
 
-  const tagItems = (claim.tags || [])
-    .map((tag) => `<span class="chip">${tag}</span>`)
+  const disciplineItems = (claim.disciplines || [])
+    .map((discipline) => `<span class="chip">${discipline}</span>`)
     .join("");
 
   const worldviewItems = (claim.worldview || [])
@@ -369,8 +361,12 @@ function renderResponse() {
       ${reasoningItems ? `<ul class="reason-list">${reasoningItems}</ul>` : "<p>Not added yet.</p>"}
     </div>
     <div class="response-block meta-block">
-      <h4>Tags</h4>
-      ${tagItems ? `<div class="chip-wrap">${tagItems}</div>` : "<p>No tags listed for this claim yet.</p>"}
+      <h4>Disciplines</h4>
+      ${
+        disciplineItems
+          ? `<div class="chip-wrap">${disciplineItems}</div>`
+          : "<p>No disciplines listed for this claim yet.</p>"
+      }
     </div>
     <div class="response-block meta-block">
       <h4>Worldview(s)</h4>
@@ -383,7 +379,7 @@ function initializeApp() {
   setupFallacyReference();
   setupThemeToggle();
   setupFilters();
-  renderTagFilters();
+  renderDisciplineFilters();
   renderWorldviewFilters();
   renderClaims();
   renderResponse();
