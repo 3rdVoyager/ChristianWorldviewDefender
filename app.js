@@ -8,8 +8,6 @@ const ui = {
   navButtons: document.querySelectorAll(".nav-btn")
 };
 
-const ALL_TAGS_VALUE = "all-tags";
-
 function toTagId(tagName) {
   return tagName.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 }
@@ -32,7 +30,7 @@ function getTags() {
 const tags = getTags();
 
 const state = {
-  activeCategoryId: ALL_TAGS_VALUE,
+  activeCategoryId: null,
   searchTerm: "",
   activeClaimId: null
 };
@@ -40,7 +38,7 @@ const state = {
 function getFilteredClaims() {
   let filtered = worldviewData;
 
-  if (state.activeCategoryId !== ALL_TAGS_VALUE) {
+  if (state.activeCategoryId) {
     filtered = filtered.filter((claim) => {
       if (!Array.isArray(claim.tags)) {
         return false;
@@ -62,8 +60,8 @@ function getFilteredClaims() {
 }
 
 function getTagNameById(tagId) {
-  if (tagId === ALL_TAGS_VALUE) {
-    return "All tags";
+  if (!tagId) {
+    return "No tag selected";
   }
 
   const tag = tags.find((item) => item.id === tagId);
@@ -87,10 +85,10 @@ function renderTagFilters() {
 
   ui.tagSelect.innerHTML = "";
 
-  const allOption = document.createElement("option");
-  allOption.value = ALL_TAGS_VALUE;
-  allOption.textContent = "All tags";
-  ui.tagSelect.appendChild(allOption);
+  const placeholderOption = document.createElement("option");
+  placeholderOption.value = "";
+  placeholderOption.textContent = "Filter by tag (optional)";
+  ui.tagSelect.appendChild(placeholderOption);
 
   tags.forEach((tag) => {
     const option = document.createElement("option");
@@ -99,16 +97,16 @@ function renderTagFilters() {
     ui.tagSelect.appendChild(option);
   });
 
-  ui.tagSelect.value = state.activeCategoryId;
+  ui.tagSelect.value = state.activeCategoryId || "";
 
   if (tags.length === 0) {
     const noTagsOption = document.createElement("option");
-    noTagsOption.value = ALL_TAGS_VALUE;
+    noTagsOption.value = "";
     noTagsOption.textContent = "No tags yet";
     ui.tagSelect.innerHTML = "";
     ui.tagSelect.appendChild(noTagsOption);
     ui.tagSelect.disabled = true;
-    ui.tagSelect.value = ALL_TAGS_VALUE;
+    ui.tagSelect.value = "";
   } else {
     ui.tagSelect.disabled = false;
   }
@@ -117,7 +115,7 @@ function renderTagFilters() {
 function setupFilters() {
   if (ui.tagSelect) {
     ui.tagSelect.addEventListener("change", (event) => {
-      state.activeCategoryId = event.target.value;
+      state.activeCategoryId = event.target.value || null;
       state.activeClaimId = null;
       renderClaims();
       renderResponse();
@@ -148,15 +146,11 @@ function renderHomeCards() {
 
   ui.homeCards.innerHTML = "";
 
-  const cards = tags.length
-    ? tags.map((tag) => ({ ...tag, shortDescription: "Filter arguments by this tag." }))
-    : [
-        {
-          id: ALL_TAGS_VALUE,
-          name: "All tags",
-          shortDescription: "Browse all arguments and use search while tags are being added."
-        }
-      ];
+  if (!tags.length) {
+    return;
+  }
+
+  const cards = tags.map((tag) => ({ ...tag, shortDescription: "Filter arguments by this tag." }));
 
   cards.forEach((tag) => {
     const button = document.createElement("button");
