@@ -132,9 +132,10 @@ body {
 
 .page-wrap {
   width: min(1120px, 92vw);
-  margin: 26px auto 60px;
+  margin: 12px auto 28px;
   display: grid;
-  gap: 22px;
+  gap: 12px;
+  min-width: 0;
 }
 
 .panel {
@@ -142,7 +143,7 @@ body {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: clamp(18px, 3vw, 28px);
+  padding: clamp(10px, 1.8vw, 18px);
   animation: fadeUp 420ms ease both;
 }
 
@@ -163,13 +164,15 @@ body {
 }
 
 .hero h2 {
-  margin: 10px 0 12px;
+  margin: 2px 0 6px;
   font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+  line-height: 1.2;
 }
 
 .hero p {
   margin: 0;
   color: var(--muted);
+  line-height: 1.45;
 }
 
 .section-head p {
@@ -180,14 +183,14 @@ body {
 .filters-wrap {
   display: grid;
   grid-template-columns: minmax(180px, 250px) minmax(200px, 280px) minmax(240px, 1fr);
-  gap: 14px;
+  gap: 8px;
   align-items: end;
-  margin: 14px 0 10px;
+  margin: 8px 0 6px;
 }
 
 .filter-group {
   display: grid;
-  gap: 6px;
+  gap: 3px;
 }
 
 .claim-btn.active {
@@ -219,7 +222,7 @@ body {
 .content-grid {
   display: grid;
   grid-template-columns: minmax(240px, 360px) minmax(0, 1fr);
-  gap: 16px;
+  gap: 10px;
 }
 
 .claims-panel,
@@ -227,7 +230,7 @@ body {
   background: var(--surface-alt);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 16px;
+  padding: 10px;
 }
 
 .claims-panel h3,
@@ -240,7 +243,7 @@ body {
   align-items: baseline;
   justify-content: space-between;
   gap: 8px;
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .claims-head h3 {
@@ -256,13 +259,13 @@ body {
 
 .claims-list {
   display: grid;
-  gap: 10px;
+  gap: 6px;
 }
 
 .claim-btn {
   text-align: left;
   width: 100%;
-  padding: 12px;
+  padding: 9px 10px;
   font-size: 0.98rem;
 }
 
@@ -270,14 +273,14 @@ body {
   min-height: 290px;
   display: grid;
   align-content: start;
-  gap: 13px;
+  gap: 8px;
 }
 
 .response-block {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
-  padding: 12px;
+  padding: 8px;
 }
 
 .meta-block {
@@ -285,11 +288,11 @@ body {
   border: none;
   border-top: 1px dashed var(--meta-divider);
   border-radius: 0;
-  padding: 10px 0 0;
+  padding: 6px 0 0;
 }
 
 .response-block h4 {
-  margin: 0 0 6px;
+  margin: 0 0 3px;
   color: var(--accent);
   font-size: 0.95rem;
   letter-spacing: 0.02em;
