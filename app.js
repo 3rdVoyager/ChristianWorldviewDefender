@@ -154,7 +154,7 @@ function renderTagFilters() {
 
   const placeholderOption = document.createElement("option");
   placeholderOption.value = "";
-  placeholderOption.textContent = "Filter by tag (optional)";
+  placeholderOption.textContent = "Filter by tag";
   ui.tagSelect.appendChild(placeholderOption);
 
   tags.forEach((tag) => {
@@ -188,7 +188,7 @@ function renderWorldviewFilters() {
 
   const placeholderOption = document.createElement("option");
   placeholderOption.value = "";
-  placeholderOption.textContent = "Filter by worldview (optional)";
+  placeholderOption.textContent = "Filter by worldview";
   ui.worldviewSelect.appendChild(placeholderOption);
 
   worldviews.forEach((worldview) => {

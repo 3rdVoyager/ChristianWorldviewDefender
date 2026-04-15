@@ -1,58 +1,58 @@
-/*🔥 Core Claims About Jesus
+/*Core Claims About Jesus
 “Jesus was just a great moral teacher”
 “The resurrection is a myth or legend”
 “The Gospels are unreliable / corrupted over time”
 “Jesus never claimed to be God”
 “Christianity copied earlier religions”
 
-🔥 Claims About Truth & Knowledge
+Claims About Truth & Knowledge
 “There is no absolute truth”
 “Truth is relative to culture or perspective”
 “You can’t really know what’s true”
 “Science is the only reliable way to know truth”
 “Faith is belief without evidence”
 
-🔥 Claims About God’s Existence
+Claims About God’s Existence
 “There is no evidence for God”
 “God is just a human invention”
 “Science has explained the universe, so God isn’t needed”
 “If God exists, why isn’t He more obvious?”
 “Miracles are impossible”
 
-🔥 Problem of Evil
+Problem of Evil
 “If God is good and all-powerful, why is there evil?”
 “Suffering disproves a loving God”
 “The world is too broken to have a good creator”
 “Natural disasters make no sense if God is in control”
 
-🔥 Morality & Ethics
+Morality & Ethics
 “Morality is subjective”
 “You don’t need God to be a good person”
 “The Bible is morally outdated”
 “Christian morality is oppressive or harmful”
 “Right and wrong are just social constructs”
 
-🔥 Christianity & Science
+Christianity & Science
 “Science disproves God”
 “Evolution disproves Christianity”
 “The Bible conflicts with science”
 “Miracles violate natural laws”
 “Religion slows scientific progress”
 
-🔥 Religious Pluralism
+Religious Pluralism
 “All religions are basically the same”
 “Christianity is just one path among many”
 “It’s arrogant to say Christianity is the only truth”
 “Different cultures create different religions, so none are objectively true”
 
-🔥 Human Nature & Purpose
+Human Nature & Purpose
 “Humans are basically good”
 “Life has no objective meaning”
 “We create our own purpose”
 “We are just highly evolved animals”
 “Consciousness is purely physical”
 
-🔥 Church & Practical Objections
+Church & Practical Objections
 “Christians are hypocrites”
 “Religion causes more harm than good”
 “The Church has done terrible things in history”
